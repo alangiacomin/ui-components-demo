@@ -6,13 +6,22 @@
         "dev": "webpack --mode development --watch",
         "build": "webpack --mode production --devtool source-map",
         "test": "jest",
-        "test:watch": "jest --watch"
+        "test:watch": "jest --watch",
+        "lint": "eslint --ext .jsx resources/js/**/*.{js,jsx}",
+        "lint:watch": "esw --watch --color --ext .jsx resources/js/**/*.{js,jsx}"
     },
     "devDependencies": {
+        "@babel/eslint-parser": "^7.13.10",
         "@babel/preset-env": "^7.13.10",
         "@babel/preset-react": "^7.12.13",
         "babel-loader": "^8.2.2",
         "babel-plugin-transform-dynamic-import": "^2.1.0",
+        "eslint": "^7.22.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-config-react-app": "^6.0.0",
+        "eslint-plugin-babel": "^5.3.1",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-watch": "^7.0.0",
         "webpack": "^5.27.0",
         "webpack-cli": "^4.5.0"
     },

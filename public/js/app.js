@@ -9258,9 +9258,9 @@ if (false) {} else {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
+/*!******************************!*\
+  !*** ./resources/js/app.jsx ***!
+  \******************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
@@ -9274,7 +9274,7 @@ var App = function App(props) {
   });
 };
 
-render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(App, {}), document.getElementById("app"));
+render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(App, {}), document.getElementById('app'));
 })();
 
 /******/ })()

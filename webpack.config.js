@@ -19,7 +19,7 @@ module.exports = {
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
       automaticNameDelimiter: '_',
-      // name: true,
+      name: true,
       cacheGroups: {
         default: {
           chunks: 'async',
