@@ -1,13 +1,13 @@
 import { ConnectedRouter, connectRouter } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
+import { PropTypes } from 'prop-types';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import {
   applyMiddleware, combineReducers, compose, createStore,
 } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import PaginaDue from './pages/PaginaDue/PaginaDue';
-import PaginaUno from './pages/PaginaUno/PaginaUno';
+import LazyComponent from './components/LazyComponent/LazyComponent';
 
 // import thunkMiddleware from 'redux-thunk'
 
@@ -42,15 +42,24 @@ const store = configureStore({});
 
 // const useAppContext = () => useContext(store);
 
-const Application = (props) => (
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Switch>
-        <Route path="/" exact component={PaginaUno} />
-        <Route path="/" component={PaginaDue} />
-      </Switch>
-    </ConnectedRouter>
-  </Provider>
-);
+// const importPage = (page) => import(`./pages/${page}/${page}`);
+
+const Application = (props) => {
+  const { importPage } = props;
+  return (
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route path="/" exact component={() => <LazyComponent component={() => importPage('PaginaUno')} />} />
+          <Route path="/" component={() => <LazyComponent component={() => importPage('PaginaDue')} />} />
+        </Switch>
+      </ConnectedRouter>
+    </Provider>
+  );
+};
+
+Application.propTypes = {
+  importPage: PropTypes.func.isRequired,
+};
 
 export default Application;

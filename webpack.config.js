@@ -1,10 +1,7 @@
-const webpack = require('webpack');
 const path = require('path');
 // const apiMocker = require('connect-api-mocker');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 // const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-// const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
 // const hasBundleAnalyzer = process.env.BUNDLE_ANALYZER === 'true';
 
@@ -13,52 +10,48 @@ module.exports = {
     removeAvailableModules: true,
     providedExports: true,
     splitChunks: {
-      chunks: 'async',
-      minSize: 40000,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      automaticNameDelimiter: '_',
-      // name: true,
+      chunks: 'all',
+      minSize: 0,
+      maxInitialRequests: Infinity,
+      name: 'vendor',
       cacheGroups: {
-        default: {
-          chunks: 'async',
-          minSize: 40000,
-          minChunks: 1,
-          reuseExistingChunk: true,
-          enforce: true,
+        vendor: {
+          chunks: 'all',
+          test: /[\\/]node_modules[\\/]/,
         },
       },
     },
   },
   cache: true,
   entry: {
-    bundle: './resources/js/index',
+    app: './resources/js/index',
+    // vendor: './node_modules/**',
     // style: './resources/sass/app.scss',
   },
   devtool: 'source-map',
   output: {
     path: path.join(`${__dirname}/public/js`),
-    filename: 'app.js',
+    filename: '[name].js',
     chunkFilename: '[name].[chunkhash].js',
     publicPath: '/public/js/',
     // jsonpFunction: 'Isee',
     // devtoolModuleFilenameTemplate: 'Isee://[namespace]/[resource-path]?[loaders]',
   },
   mode: 'development',
-  // plugins: [].concat(
-  //   hasBundleAnalyzer ? new BundleAnalyzerPlugin() : [],
-  //   new LodashModuleReplacementPlugin(),
-  //   new webpack.optimize.OccurrenceOrderPlugin(),
-  //   new ExtractTextPlugin({
-  //     filename: '../../Content/[name].css',
-  //     disable: false,
-  //     allChunks: true,
-  //   }),
-  //   new DuplicatePackageCheckerPlugin({
-  //     emitError: false,
-  //   }),
-  // ),
+  plugins: [].concat(
+    // new BundleAnalyzerPlugin(),
+    // hasBundleAnalyzer ? new BundleAnalyzerPlugin() : [],
+    // new LodashModuleReplacementPlugin(),
+    // new webpack.optimize.OccurrenceOrderPlugin(),
+    // new ExtractTextPlugin({
+    //   filename: '../../Content/[name].css',
+    //   disable: false,
+    //   allChunks: true,
+    // }),
+    // new DuplicatePackageCheckerPlugin({
+    //   emitError: true,
+    // }),
+  ),
   module: {
     rules: [
       {
