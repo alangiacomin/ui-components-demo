@@ -19,7 +19,7 @@ module.exports = {
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
       automaticNameDelimiter: '_',
-      name: true,
+      // name: true,
       cacheGroups: {
         default: {
           chunks: 'async',
@@ -33,7 +33,7 @@ module.exports = {
   },
   cache: true,
   entry: {
-    bundle: './resources/js/app',
+    bundle: './resources/js/index',
     // style: './resources/sass/app.scss',
   },
   devtool: 'source-map',
@@ -69,7 +69,7 @@ module.exports = {
           options: {
             presets: [
               ['@babel/preset-env', { modules: false }],
-              ["@babel/preset-react", { runtime: "automatic" }],
+              ['@babel/preset-react', { runtime: 'automatic' }],
               // 'stage-2'
             ],
             // plugins: ['lodash'],
