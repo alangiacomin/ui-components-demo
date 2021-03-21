@@ -1,35 +1,35 @@
 import TestRenderer from 'react-test-renderer';
 import { getChildren, hasClass } from '../../../testsUtils';
-import Container from './Container';
+import Col from './Col';
 
-describe('Container', () => {
+describe('Col', () => {
   it('render', () => {
-    const { root } = TestRenderer.create(<Container>test</Container>);
+    const { root } = TestRenderer.create(<Col>test</Col>);
     expect(root.findByType('div')).toBeDefined();
   });
 
   it('children', () => {
-    const { root } = TestRenderer.create(<Container>test</Container>);
+    const { root } = TestRenderer.create(<Col>test</Col>);
     expect(getChildren(root.findByType('div'))).toBe('test');
   });
 
   it('main class', () => {
-    const { root } = TestRenderer.create(<Container>test</Container>);
-    expect(hasClass(root.findByType('div'), 'container')).toBe(true);
+    const { root } = TestRenderer.create(<Col>test</Col>);
+    expect(hasClass(root.findByType('div'), 'col')).toBe(true);
   });
 
   it('additional string class', () => {
-    const { root } = TestRenderer.create(<Container className="myClass">test</Container>);
+    const { root } = TestRenderer.create(<Col className="myClass">test</Col>);
     expect(hasClass(root.findByType('div'), 'myClass')).toBe(true);
   });
 
   it('additional true class', () => {
-    const { root } = TestRenderer.create(<Container className={{ myClass: true }}>test</Container>);
+    const { root } = TestRenderer.create(<Col className={{ myClass: true }}>test</Col>);
     expect(hasClass(root.findByType('div'), 'myClass')).toBe(true);
   });
 
   it('additional false class', () => {
-    const { root } = TestRenderer.create(<Container className={{ myClass: false }}>test</Container>);
+    const { root } = TestRenderer.create(<Col className={{ myClass: false }}>test</Col>);
     expect(hasClass(root.findByType('div'), 'myClass')).toBe(false);
   });
 });

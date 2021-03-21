@@ -1,12 +1,12 @@
 import { ConnectedRouter } from 'connected-react-router';
 import { Provider } from 'react-redux';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-// import routes from './config/routes';
+import routesConfig from './config/routes';
 import configureStore, { history } from './configureStore';
 import Routes from './Routes';
 import { getRoutesFromConfig } from './utils/routeHelper';
 
-const routes = {};
+// const routes = {};
 
 const Application = () => {
   const store = configureStore({});
@@ -14,7 +14,7 @@ const Application = () => {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <ErrorBoundary>
-          <Routes routes={getRoutesFromConfig(routes)} />
+          <Routes routes={getRoutesFromConfig(routesConfig)} />
         </ErrorBoundary>
       </ConnectedRouter>
     </Provider>
