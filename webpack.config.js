@@ -1,14 +1,8 @@
 const path = require('path');
-// const apiMocker = require('connect-api-mocker');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-
-// const hasBundleAnalyzer = process.env.BUNDLE_ANALYZER === 'true';
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   optimization: {
-    removeAvailableModules: true,
-    providedExports: true,
     splitChunks: {
       chunks: 'all',
       minSize: 0,
@@ -22,11 +16,9 @@ module.exports = {
       },
     },
   },
-  cache: true,
   entry: {
     app: './resources/js/index',
-    // vendor: './node_modules/**',
-    // style: './resources/sass/app.scss',
+    style: './resources/sass/app.scss',
   },
   devtool: 'source-map',
   output: {
@@ -34,51 +26,34 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[name].[chunkhash].js',
     publicPath: '/public/js/',
-    // jsonpFunction: 'Isee',
-    // devtoolModuleFilenameTemplate: 'Isee://[namespace]/[resource-path]?[loaders]',
   },
   mode: 'development',
-  plugins: [].concat(
-    // new BundleAnalyzerPlugin(),
-    // hasBundleAnalyzer ? new BundleAnalyzerPlugin() : [],
-    // new LodashModuleReplacementPlugin(),
-    // new webpack.optimize.OccurrenceOrderPlugin(),
-    // new ExtractTextPlugin({
-    //   filename: '../../Content/[name].css',
-    //   disable: false,
-    //   allChunks: true,
-    // }),
-    // new DuplicatePackageCheckerPlugin({
-    //   emitError: true,
-    // }),
-  ),
+  // plugins: [].concat(
+  //   new MiniCssExtractPlugin(),
+  // ),
   module: {
     rules: [
       {
         test: /\.jsx?$/, // Match both .js and .jsx files
-        exclude: [/node_modules\/!(framework-ui-components)/],
+        exclude: [/node_modules/],
         use: {
           loader: 'babel-loader',
           options: {
             presets: [
               ['@babel/preset-env', { modules: false }],
               ['@babel/preset-react', { runtime: 'automatic' }],
-              // 'stage-2'
             ],
-            // plugins: ['lodash'],
           },
         },
       },
-      // {
-      //   test: /\.scss$/,
-      //   use: ExtractTextPlugin.extract(
-      //     {
-      //       fallback: 'style-loader',
-      //       use: ['css-loader', 'sass-loader'],
-      //       publicPath: '../../Content/',
-      //     },
-      //   ),
-      // },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
+      },
       // {
       //   test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
       //   use: [{
@@ -93,29 +68,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-    // alias: {
-    //   // soluzione per risolvere conflitti di versione
-    //   isarray: path.resolve(__dirname, 'node_modules/isarray'),
-    // },
   },
-  // devServer: {
-  //   contentBase: path.join(__dirname, 'wwwroot'),
-  //   publicPath: '/App/Dist/',
-  //   writeToDisk: true,
-  //   compress: true,
-  //   port: 7999,
-  //   before(app) {
-  //     app.use('/', apiMocker({
-  //       target: 'App/mock/api/',
-  //       nextOnNotFound: true,
-  //     }));
-  //   },
-  //   proxy: [{
-  //     // specificare il subpath delle chiamate da inoltrare al mock server
-  //     context: [
-  //       '/Dichiarazione',
-  //     ],
-  //     target: 'http://localhost:17999',
-  //   }],
-  // },
 };
