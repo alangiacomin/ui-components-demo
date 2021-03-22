@@ -9,7 +9,8 @@ const navbarLinks = {
     routes.secondPage,
   ],
   topRight: [
-    routes.secondPage,
+    routes.login,
+    routes.logout,
   ],
 };
 

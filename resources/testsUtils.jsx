@@ -1,5 +1,8 @@
 import { unmountComponentAtNode } from 'react-dom';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router';
 import TestRenderer from 'react-test-renderer';
+import { combineReducers, createStore } from 'redux';
 
 let container = null;
 beforeEach(() => {
@@ -25,6 +28,17 @@ const hasClass = (domElement, className) => domElement.props.className.split(' '
 
 const getChildren = (domElement) => domElement.props.children;
 
+const emptyReducer = (state = [], action) => state;
+
+const testRender = (children, { initialState, reducers = [] } = {}) => {
+  const store = createStore(combineReducers({ user: emptyReducer }, ...reducers), initialState);
+  return TestRenderer.create(
+    <Provider store={store}>
+      <MemoryRouter>{children}</MemoryRouter>
+    </Provider>,
+  );
+};
+
 export {
-  createElement, hasClass, getChildren,
+  createElement, hasClass, getChildren, testRender,
 };

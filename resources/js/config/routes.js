@@ -9,6 +9,18 @@ const routes = {
     to: '/test',
     component: 'PaginaDue',
   },
+  login: {
+    title: 'Login',
+    to: '/login',
+    component: 'PaginaDue',
+    perm: 'special_guests_only',
+  },
+  logout: {
+    title: 'Logout',
+    to: '/logout',
+    component: 'PaginaDue',
+    perm: 'special_users_only',
+  },
 };
 
 export default routes;

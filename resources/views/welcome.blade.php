@@ -27,7 +27,8 @@
 
   <script>
     window.appname='{{ config('app.name', 'My title') }}';
-    window.baseurl='{{ url("/") }}'
+    window.baseurl='{{ url("/") }}';
+    window.user=@json($user)||{};
   </script>
 </head>
 

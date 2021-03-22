@@ -4,12 +4,14 @@ import {
   applyMiddleware, combineReducers, compose, createStore,
 } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import userReducer from './reducers/userReducer';
 
 const history = createBrowserHistory({ basename: '/' });
 
 // const rootReducer = (state = [], action) => state;
 const reducers = {
   // rootProva: rootReducer,
+  user: userReducer,
 };
 
 const middlewares = []; // [loggerMiddleware, thunkMiddleware]
