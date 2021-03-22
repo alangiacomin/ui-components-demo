@@ -8,9 +8,7 @@ import userReducer from './reducers/userReducer';
 
 const history = createBrowserHistory({ basename: '/' });
 
-// const rootReducer = (state = [], action) => state;
 const reducers = {
-  // rootProva: rootReducer,
   user: userReducer,
 };
 

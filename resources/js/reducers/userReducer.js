@@ -3,12 +3,12 @@ const actions = {
   LOGIN_FAILED: `${actionPrefix}/LOGIN_FAILED`,
   LOGGED_IN: `${actionPrefix}/LOGGED_IN`,
   LOGGED_OUT: `${actionPrefix}/LOGGED_OUT`,
-  SET_PROFILE: `${actionPrefix}/SET_PROFILE`,
+  SET_DATA: `${actionPrefix}/SET_DATA`,
 };
 
-const reducer = (state = [], action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
-    case actions.SET_PROFILE:
+    case actions.SET_DATA:
       return {
         ...state,
         ...action.payload,

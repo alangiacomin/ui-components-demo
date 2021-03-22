@@ -13,7 +13,7 @@ const Application = () => {
 
   useEffect(() => {
     // devo farlo così senza useDispatch() perché ancora non sono dentro il <Provider />
-    store.dispatch({ type: USER_ACTIONS.SET_PROFILE, payload: window.user });
+    store.dispatch({ type: USER_ACTIONS.SET_DATA, payload: window.user });
   }, [store]);
 
   return (
