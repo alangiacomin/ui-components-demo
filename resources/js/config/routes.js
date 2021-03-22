@@ -12,7 +12,7 @@ const routes = {
   login: {
     title: 'Login',
     to: '/login',
-    component: 'PaginaDue',
+    component: 'Login',
     perm: 'special_guests_only',
   },
   logout: {
