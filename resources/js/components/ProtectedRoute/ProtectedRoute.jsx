@@ -13,8 +13,6 @@ const ProtectedRoute = (props) => {
   const stateRouterLocation = useSelector((state) => state.router.location);
   const thisReferrer = stateRouterLocation.pathname;
   const pastReferrer = (stateRouterLocation.state || {}).referrer;
-  console.log('thisReferrer', thisReferrer);
-  console.log('pastReferrer', pastReferrer);
 
   if (perm && !perm.startsWith('special_') && !hasPermission(user, perm)) {
     if (user.id) {
