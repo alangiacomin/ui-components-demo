@@ -1,12 +1,9 @@
 import classNames from 'classnames';
 import { PropTypes } from 'prop-types';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { hasPermission } from '../../utils/userHelper';
+import NavbarItem from './NavbarItem';
 
 const NavbarItems = (props) => {
   const { className, links } = props;
-  const user = useSelector((state) => state.user);
   const navbarItemsClassName = classNames(
     'navbar-nav',
     className,
@@ -14,25 +11,9 @@ const NavbarItems = (props) => {
 
   return (
     <ul className={navbarItemsClassName}>
-      {links && links.map((link) => {
-        if (!hasPermission(user, link.perm)) {
-          return null;
-        }
-        const cn = classNames(
-          'nav-item',
-        );
-        return (
-          <li key={link.id} className={cn}>
-            <NavLink
-              className="nav-link"
-              to={link.to}
-              exact={link.exact}
-              isActive={link.isActive}
-            >{link.title}
-            </NavLink>
-          </li>
-        );
-      })}
+      {links && links.map((link) => (
+        <NavbarItem key={link.id} link={link} />
+      ))}
     </ul>
   );
 };

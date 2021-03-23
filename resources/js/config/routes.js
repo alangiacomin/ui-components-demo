@@ -8,6 +8,7 @@ const routes = {
     title: 'Seconda pagina',
     to: '/test',
     component: 'PaginaDue',
+    perm: 'special_users_only',
   },
   login: {
     title: 'Login',

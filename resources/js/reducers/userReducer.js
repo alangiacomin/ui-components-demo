@@ -8,6 +8,14 @@ const actions = {
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
+    case actions.LOGGED_IN:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case actions.LOGGED_OUT:
+      return {
+      };
     case actions.SET_DATA:
       return {
         ...state,

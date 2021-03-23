@@ -1,29 +1,42 @@
-/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { createContext } from 'react';
+import { createContext, useCallback } from 'react';
 
-/*
-https://medium.com/@ippei.tanaka/form-with-the-new-react-context-api-12e3ba601b3d
-*/
-
-const FormContext = createContext({ onChangeData: () => null });
+const FormContext = createContext({ });
 
 const Form = (props) => {
-  const { onChangeData, children } = props;
-  //console.log('form-props', props);
+  const {
+    data, setData, onSubmit, children,
+  } = props;
+
+  const setFormData = useCallback((name, value) => {
+    setData({ ...data, [name]: value });
+  }, [data, setData]);
+
+  const handleSubmit = useCallback((event) => {
+    onSubmit();
+    event.preventDefault();
+  }, [onSubmit]);
 
   return (
-    <FormContext.Provider value={{ onChangeData }}>
-      {children}
+    <FormContext.Provider value={{ setFormData }}>
+      <form onSubmit={handleSubmit}>
+        {children}
+      </form>
     </FormContext.Provider>
   );
 };
 
-export const FormConsumer = ({ children }) => (
-  <FormContext.Consumer>
-    {(context) => children({ ...context })}
-  </FormContext.Consumer>
-);
+const withForm = (Wrapped) => {
+  const WrappedConsumer = (props) => (
+    <FormContext.Consumer>
+      {(context) => (<Wrapped {...props} {...context} />)}
+    </FormContext.Consumer>
+  );
+  return WrappedConsumer;
+};
 
-export default Form;
+export {
+  Form as default,
+  withForm,
+};

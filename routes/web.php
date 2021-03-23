@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use TCG\Voyager\Facades\Voyager;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +26,13 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
-Route::get('/{any}', function () {
+Route::get('/user', [UserController::class, 'user']);
+Route::post('/login', [UserController::class, 'postLogin']);
+Route::post('/logout', [UserController::class, 'logout']);
+Route::get('/{any}', [HomeController::class, 'index'])->where('any', '.*')->name('home');
 
-    return view('welcome', ['user' => Auth::check() ? Auth::user()->fullData() : null]);
-    return view('welcome');
-})->where('any', '.*');
+// Route::get('/{any}', function () {
+//
+//     return view('welcome', ['user' => Auth::check() ? Auth::user()->fullData() : null]);
+//     return view('welcome');
+// })->where('any', '.*');

@@ -1,3 +1,5 @@
+import { postLogout } from '../apis/apiUser';
+import { USER_ACTIONS } from '../reducers/userReducer';
 import { getRoutesFromConfig } from '../utils/routeHelper';
 import routesConfig from './routes';
 
@@ -11,6 +13,17 @@ const navbarLinks = {
   topRight: [
     routes.login,
     routes.logout,
+    {
+      ...routes.logout,
+      id: 'logout2',
+      onClick: (dispatch) => {
+        postLogout()
+          .then((response) => {
+            // const { dispatch } = useDispatch();
+            dispatch({ type: USER_ACTIONS.LOGGED_OUT });
+          });
+      },
+    },
   ],
 };
 
