@@ -22,19 +22,21 @@ module.exports = {
   },
   devtool: 'source-map',
   output: {
-    path: path.join(`${__dirname}/public/js`),
-    filename: '[name].js',
-    chunkFilename: '[name].[chunkhash].js',
-    publicPath: '/public/js/',
+    path: path.join(`${__dirname}/public`),
+    filename: 'js/[name].js',
+    chunkFilename: 'js/[name].[chunkhash].js',
   },
   mode: 'development',
-  // plugins: [].concat(
-  //   new MiniCssExtractPlugin(),
-  // ),
+  plugins: [].concat(
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css',
+    }),
+  ),
   module: {
     rules: [
       {
-        test: /\.jsx?$/, // Match both .js and .jsx files
+        test: /\.jsx?$/,
         exclude: [/node_modules/],
         use: {
           loader: 'babel-loader',
@@ -49,21 +51,12 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
+          // 'style-loader',
           'css-loader',
           'sass-loader',
         ],
       },
-      // {
-      //   test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-      //   use: [{
-      //     loader: 'file-loader',
-      //     options: {
-      //       name: '[name].[ext]',
-      //       outputPath: '../../Content/fonts/',
-      //     },
-      //   }],
-      // },
     ],
   },
   resolve: {
