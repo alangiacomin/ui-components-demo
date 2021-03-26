@@ -1,14 +1,28 @@
 // import { NavLink } from 'react-router-dom';
-import { testRender } from '../../../testsUtils';
+import { TestRender } from '../../../testsUtils';
 import NavbarItems from './NavbarItems';
 
 describe('NavbarItems', () => {
   it('render', () => {
-    const { root } = testRender(
-      <NavbarItems>test</NavbarItems>,
-    );
-    expect(root.findByType('ul')).toBeDefined();
+    const { renderWrapped, expectSelector, execute } = TestRender();
+    execute({
+      act: () => {
+        renderWrapped(
+          <NavbarItems links={[]}>test</NavbarItems>,
+        );
+      },
+      assert: () => {
+        expectSelector('ul').toBeDefined();
+      },
+    });
   });
+
+  // it('render', () => {
+  //   const { root } = testRender(
+  //     <NavbarItems>test</NavbarItems>,
+  //   );
+  //   expect(root.findByType('ul')).toBeDefined();
+  // });
 
   // it('children', () => {
   //   const { root } = testRender(

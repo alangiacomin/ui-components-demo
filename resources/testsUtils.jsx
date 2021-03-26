@@ -1,23 +1,44 @@
-import { unmountComponentAtNode } from 'react-dom';
+import { render as renderDom, unmountComponentAtNode } from 'react-dom';
+import { act as actDom } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
-import TestRenderer from 'react-test-renderer';
 import { combineReducers, createStore } from 'redux';
 
-let container = null;
-beforeEach(() => {
-  // setup a DOM element as a render target
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
+const emptyReducer = (state = [], action) => state;
 
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
+const TestRender = () => {
+  let container = null;
+  const render = (Component) => renderDom(Component, container);
+  const renderWrapped = (Component, { initialState = {}, reducers = [] } = {}) => {
+    const store = createStore(combineReducers({ user: emptyReducer }, ...reducers), initialState);
+    renderDom(
+      <Provider store={store}>
+        <MemoryRouter>{Component}</MemoryRouter>
+      </Provider>,
+      container,
+    );
+  };
+  const expectSelector = (sel) => expect(container.querySelector(sel));
+  const execute = ({ arrange, act, assert }) => {
+    // before each test
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    // test
+    arrange && arrange();
+    actDom(act);
+    assert();
+    // after each test
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  };
 
+  return {
+    execute, render, renderWrapped, expectSelector,
+  };
+};
+
+/*
 const createElement = (Element) => {
   const WrappedElement = (props) => <Element />;
   const testRenderer = TestRenderer.create(<WrappedElement />);
@@ -28,7 +49,7 @@ const hasClass = (domElement, className) => domElement.props.className.split(' '
 
 const getChildren = (domElement) => domElement.props.children;
 
-const emptyReducer = (state = [], action) => state;
+const getProp = (domElement, prop) => domElement.props[prop];
 
 const testRender = (children, { initialState, reducers = [] } = {}) => {
   const store = createStore(combineReducers({ user: emptyReducer }, ...reducers), initialState);
@@ -38,7 +59,20 @@ const testRender = (children, { initialState, reducers = [] } = {}) => {
     </Provider>,
   );
 };
+*/
+
+const noOpFunc = () => null;
 
 export {
-  createElement, hasClass, getChildren, testRender,
+  TestRender,
+  noOpFunc,
+  // createElement,
+  // hasClass,
+  // getChildren,
+  // testRender,
+  // createElement,
+  // hasClass,
+  // getChildren,
+  // testRender,
+  // getProp,
 };

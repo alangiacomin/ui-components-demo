@@ -1,21 +1,33 @@
-import { getChildren, testRender } from '../../../testsUtils';
-import Container from '../Container/Container';
-import Navbar from '../Navbar/Navbar';
+import { TestRender } from '../../../testsUtils';
 import LayoutMain from './LayoutMain';
 
 describe('LayoutMain', () => {
   it('render', () => {
-    const { root } = testRender(
-      <LayoutMain>test</LayoutMain>,
-    );
-    expect(root.findByType(Navbar)).toBeDefined();
-    expect(root.findByType(Container)).toBeDefined();
+    const { renderWrapped, expectSelector, execute } = TestRender();
+    execute({
+      act: () => {
+        renderWrapped(
+          <LayoutMain>test</LayoutMain>,
+        );
+      },
+      assert: () => {
+        expectSelector('.nav').toBeDefined();
+        expectSelector('.container').toBeDefined();
+      },
+    });
   });
 
   it('children', () => {
-    const { root } = testRender(
-      <LayoutMain>test</LayoutMain>,
-    );
-    expect(getChildren(root.findByType(Container))).toBe('test');
+    const { renderWrapped, expectSelector, execute } = TestRender();
+    execute({
+      act: () => {
+        renderWrapped(
+          <LayoutMain>test</LayoutMain>,
+        );
+      },
+      assert: () => {
+        expectSelector('.container').toHaveTextContent('test');
+      },
+    });
   });
 });

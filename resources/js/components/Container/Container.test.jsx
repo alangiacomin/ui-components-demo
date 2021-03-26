@@ -1,35 +1,88 @@
-import TestRenderer from 'react-test-renderer';
-import { getChildren, hasClass } from '../../../testsUtils';
+import { TestRender } from '../../../testsUtils';
 import Container from './Container';
 
 describe('Container', () => {
   it('render', () => {
-    const { root } = TestRenderer.create(<Container>test</Container>);
-    expect(root.findByType('div')).toBeDefined();
+    const { render, expectSelector, execute } = TestRender();
+    execute({
+      act: () => {
+        render(
+          <Container>test</Container>,
+        );
+      },
+      assert: () => {
+        expectSelector('div').toBeDefined();
+      },
+    });
   });
 
   it('children', () => {
-    const { root } = TestRenderer.create(<Container>test</Container>);
-    expect(getChildren(root.findByType('div'))).toBe('test');
+    const { render, expectSelector, execute } = TestRender();
+    execute({
+      act: () => {
+        render(
+          <Container>test</Container>,
+        );
+      },
+      assert: () => {
+        expectSelector('div').toHaveTextContent('test');
+      },
+    });
   });
 
   it('main class', () => {
-    const { root } = TestRenderer.create(<Container>test</Container>);
-    expect(hasClass(root.findByType('div'), 'container')).toBe(true);
+    const { render, expectSelector, execute } = TestRender();
+    execute({
+      act: () => {
+        render(
+          <Container>test</Container>,
+        );
+      },
+      assert: () => {
+        expectSelector('div').toHaveClass('container');
+      },
+    });
   });
 
   it('additional string class', () => {
-    const { root } = TestRenderer.create(<Container className="myClass">test</Container>);
-    expect(hasClass(root.findByType('div'), 'myClass')).toBe(true);
+    const { render, expectSelector, execute } = TestRender();
+    execute({
+      act: () => {
+        render(
+          <Container className="myClass">test</Container>,
+        );
+      },
+      assert: () => {
+        expectSelector('div').toHaveClass('myClass');
+      },
+    });
   });
 
   it('additional true class', () => {
-    const { root } = TestRenderer.create(<Container className={{ myClass: true }}>test</Container>);
-    expect(hasClass(root.findByType('div'), 'myClass')).toBe(true);
+    const { render, expectSelector, execute } = TestRender();
+    execute({
+      act: () => {
+        render(
+          <Container className={{ myClass: true }}>test</Container>,
+        );
+      },
+      assert: () => {
+        expectSelector('div').toHaveClass('myClass');
+      },
+    });
   });
 
   it('additional false class', () => {
-    const { root } = TestRenderer.create(<Container className={{ myClass: false }}>test</Container>);
-    expect(hasClass(root.findByType('div'), 'myClass')).toBe(false);
+    const { render, expectSelector, execute } = TestRender();
+    execute({
+      act: () => {
+        render(
+          <Container className={{ myClass: false }}>test</Container>,
+        );
+      },
+      assert: () => {
+        expectSelector('div').not.toHaveClass('myClass');
+      },
+    });
   });
 });
