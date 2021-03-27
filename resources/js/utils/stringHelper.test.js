@@ -28,75 +28,80 @@ describe('isEmptyString', () => {
 });
 
 describe('trimStart', () => {
-  test('null string', () => {
+  it('null string', () => {
     const trimmed = trimStart(null);
-    expect(trimmed).toMatch('');
+    expect(trimmed).toEqual('');
   });
 
-  test('undefined string', () => {
+  it('undefined string', () => {
     const trimmed = trimStart(undefined);
-    expect(trimmed).toMatch('');
+    expect(trimmed).toEqual('');
   });
 
-  test('not a string', () => {
+  it('not a string', () => {
     const trimmed = trimStart(Array(7));
-    expect(trimmed).toMatch('');
+    expect(trimmed).toEqual('');
   });
 
-  test('empty string', () => {
+  it('empty string', () => {
     const trimmed = trimStart('');
-    expect(trimmed).toMatch('');
+    expect(trimmed).toEqual('');
   });
 
-  test('no trim, default char', () => {
+  it('no trim, default char', () => {
     const trimmed = trimStart('xProva');
-    expect(trimmed).toMatch('xProva');
+    expect(trimmed).toEqual('xProva');
   });
 
-  test('no trim, empty char', () => {
+  it('no trim, empty char', () => {
     const trimmed = trimStart('xProva', '');
-    expect(trimmed).toMatch('xProva');
+    expect(trimmed).toEqual('xProva');
   });
 
-  test('first char', () => {
+  it('first char', () => {
     const trimmed = trimStart('xProva', 'x');
-    expect(trimmed).toMatch('Prova');
+    expect(trimmed).toEqual('Prova');
   });
 
-  test('not first char', () => {
+  it('not first char', () => {
     const trimmed = trimStart('xProva', 'P');
-    expect(trimmed).toMatch('Prova');
+    expect(trimmed).toEqual('xProva');
+  });
+
+  it('array chars', () => {
+    const trimmed = trimStart('xProva', ['P']);
+    expect(trimmed).toEqual('xProva');
   });
 });
 
 describe('upperFirst', () => {
   test('null string', () => {
     const upper = upperFirst(null);
-    expect(upper).toMatch('');
+    expect(upper).toEqual('');
   });
 
   test('undefined string', () => {
     const upper = upperFirst(undefined);
-    expect(upper).toMatch('');
+    expect(upper).toEqual('');
   });
 
   test('not a string', () => {
     const upper = upperFirst(Array(7));
-    expect(upper).toMatch('');
+    expect(upper).toEqual('');
   });
 
   test('empty string', () => {
     const upper = upperFirst('');
-    expect(upper).toMatch('');
+    expect(upper).toEqual('');
   });
 
   test('one char string', () => {
     const upper = upperFirst('a');
-    expect(upper).toMatch('A');
+    expect(upper).toEqual('A');
   });
 
   test('complex string', () => {
     const upper = upperFirst('tHE QUICK BROWN FOX JUMPED OVER THE LAZY DOGS');
-    expect(upper).toMatch('The quick brown fox jumped over the lazy dogs');
+    expect(upper).toEqual('The quick brown fox jumped over the lazy dogs');
   });
 });
