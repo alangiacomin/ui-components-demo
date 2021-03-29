@@ -1,13 +1,14 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+        "copy": "",
+        "start": "npm run dev -- --watch",
+        "dev": "webpack --mode development",
+        "build": "webpack --mode production --devtool source-map",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "lint": "eslint --ext .jsx resources/js/**/*.{js,jsx}",
+        "lint:watch": "esw --watch --color --ext .jsx resources/js/**/*.{js,jsx}"
     },
     "devDependencies": {
         "@babel/core": "7.13.10",
