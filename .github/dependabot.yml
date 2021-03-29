@@ -5,6 +5,13 @@
 
 version: 2
 updates:
+
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
@@ -12,3 +19,13 @@ updates:
     # Raise pull requests for version updates
     # to pip against the `develop` branch
     target-branch: "demo2"
+    open-pull-requests-limit: 25
+    
+  - package-ecosystem: "composer" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily"
+    # Raise pull requests for version updates
+    # to pip against the `develop` branch
+    target-branch: "demo2"
+    open-pull-requests-limit: 25
