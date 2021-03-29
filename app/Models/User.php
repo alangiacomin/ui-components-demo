@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends \TCG\Voyager\Models\User
 {
     use HasFactory, Notifiable;
 
@@ -40,4 +40,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Restituisce tutte le informazioni utente compresi ruoli e permessi
+     *
+     * @var array
+     */
+    function fullData()
+    {
+        $this->role_list = $this->roles_all()
+            ->pluck('name')->toArray();
+
+        $this->permission_list = $this->roles_all()
+            ->pluck('permissions')->flatten()
+            ->pluck('key')->toArray();
+
+        return $this;
+    }
 }

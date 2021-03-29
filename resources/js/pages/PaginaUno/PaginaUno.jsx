@@ -1,0 +1,52 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import LayoutMain from '../../components/LayoutMain/LayoutMain';
+import Modale from '../../components/Modale/Modale';
+import routes from '../../config/routes';
+
+const PaginaUno = (props) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState('');
+  const apriModale = () => {
+    setMessage('');
+    setOpenModal(true);
+  };
+  const confermaModale = () => {
+    setMessage('Hai confermato la modale');
+    setOpenModal(false);
+  };
+  const annullaModale = () => {
+    setMessage('Hai annullato la modale');
+    setOpenModal(false);
+  };
+  return (
+    <LayoutMain>
+      <h1>PAGINA UNO</h1>
+      <p><Link to="/">Pagina uno</Link></p>
+      <p><Link to={routes.secondPage.to}>Pagina due</Link></p>
+      <p><input name="test" /></p>
+      <p>
+        <button
+          type="button"
+          className="button btn button-primary btn-primary"
+          onClick={apriModale}
+        >
+          Apri modale
+        </button>
+      </p>
+      <p>{message}</p>
+      <Modale
+        show={openModal}
+        onConfirm={confermaModale}
+        onCancel={annullaModale}
+        title="Titolo modale"
+        confirmTitle="Conferma"
+        cancelTitle="Annulla"
+      >
+        Qui corpo modale
+      </Modale>
+    </LayoutMain>
+  );
+};
+
+export default PaginaUno;
