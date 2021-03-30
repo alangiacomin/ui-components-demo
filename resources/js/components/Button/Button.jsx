@@ -19,7 +19,7 @@ const Button = (props) => {
 
   const cn = classNames(
     'btn',
-    `btn${outline ? '-outline' : ''}-${variety}`,
+    variety && `btn${outline ? '-outline' : ''}-${variety}`,
     className,
   );
 
