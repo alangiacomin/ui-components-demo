@@ -41,7 +41,7 @@ const Login = () => {
           <Form data={loginData} setData={setLoginData} onSubmit={login}>
             <Input name="email" autoFocus />
             <Input name="password" type="password" />
-            <Button disabled={submitting}>Login</Button>
+            <Button submit variety="primary" disabled={submitting}>Login</Button>
           </Form>
           <p>{errorMessage}</p>
         </Col>
