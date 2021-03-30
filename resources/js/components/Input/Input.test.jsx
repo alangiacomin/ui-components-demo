@@ -1,4 +1,5 @@
-import { noOpFunc, TestRender } from '../../../testsUtils';
+import { fireEvent } from '@testing-library/react';
+import { TestRender } from '../../../testsUtils';
 import Input from './Input';
 
 describe('Input', () => {
@@ -7,7 +8,7 @@ describe('Input', () => {
     execute({
       act: () => {
         render(
-          <Input name="myInput" setFormData={noOpFunc} />,
+          <Input name="myInput" setFormData={jest.fn()} />,
         );
       },
       assert: () => {
@@ -21,7 +22,7 @@ describe('Input', () => {
     execute({
       act: () => {
         render(
-          <Input name="myInput" setFormData={noOpFunc} />,
+          <Input name="myInput" setFormData={jest.fn()} />,
         );
       },
       assert: () => {
@@ -35,7 +36,7 @@ describe('Input', () => {
     execute({
       act: () => {
         render(
-          <Input name="myInput" setFormData={noOpFunc} />,
+          <Input name="myInput" setFormData={jest.fn()} />,
         );
       },
       assert: () => {
@@ -49,7 +50,7 @@ describe('Input', () => {
     execute({
       act: () => {
         render(
-          <Input name="myInput" setFormData={noOpFunc} type="text" />,
+          <Input name="myInput" setFormData={jest.fn()} type="text" />,
         );
       },
       assert: () => {
@@ -63,7 +64,7 @@ describe('Input', () => {
     execute({
       act: () => {
         render(
-          <Input name="myInput" setFormData={noOpFunc} type="submit" />,
+          <Input name="myInput" setFormData={jest.fn()} type="submit" />,
         );
       },
       assert: () => {
@@ -77,7 +78,7 @@ describe('Input', () => {
     execute({
       act: () => {
         render(
-          <Input name="myInput" setFormData={noOpFunc} type="password" />,
+          <Input name="myInput" setFormData={jest.fn()} type="password" />,
         );
       },
       assert: () => {
@@ -91,7 +92,7 @@ describe('Input', () => {
     execute({
       act: () => {
         render(
-          <Input name="myInput" setFormData={noOpFunc} />,
+          <Input name="myInput" setFormData={jest.fn()} />,
         );
       },
       assert: () => {
@@ -105,7 +106,7 @@ describe('Input', () => {
     execute({
       act: () => {
         render(
-          <Input name="myInput" setFormData={noOpFunc} value="testValue" />,
+          <Input name="myInput" setFormData={jest.fn()} value="testValue" />,
         );
       },
       assert: () => {
@@ -119,7 +120,7 @@ describe('Input', () => {
     execute({
       act: () => {
         render(
-          <Input name="myInput" setFormData={noOpFunc} />,
+          <Input name="myInput" setFormData={jest.fn()} />,
         );
       },
       assert: () => {
@@ -133,11 +134,30 @@ describe('Input', () => {
     execute({
       act: () => {
         render(
-          <Input name="myInput" setFormData={noOpFunc} autoFocus />,
+          <Input name="myInput" setFormData={jest.fn()} autoFocus />,
         );
       },
       assert: () => {
         expectSelector('input').toHaveFocus();
+      },
+    });
+  });
+
+  it('change value', () => {
+    const {
+      render, getSelector, execute,
+    } = TestRender();
+    const setFormData = jest.fn();
+    execute({
+      act: () => {
+        render(
+          <Input name="myInput" setFormData={setFormData} autoFocus />,
+        );
+        const input = getSelector('input');
+        fireEvent.change(input, { target: { value: 'testValue' } });
+      },
+      assert: () => {
+        expect(setFormData).toHaveBeenCalledTimes(1);
       },
     });
   });

@@ -7,7 +7,7 @@ const actions = {
 };
 
 const reducer = (state = {}, action) => {
-  switch (action.type) {
+  switch ((action || {}).type) {
     case actions.LOGGED_IN:
       return {
         ...state,

@@ -11,14 +11,15 @@ const TestRender = () => {
   const render = (Component) => renderDom(Component, container);
   const renderWrapped = (Component, { initialState = {}, reducers = [] } = {}) => {
     const store = createStore(combineReducers({ user: emptyReducer }, ...reducers), initialState);
-    renderDom(
+    return renderDom(
       <Provider store={store}>
         <MemoryRouter>{Component}</MemoryRouter>
       </Provider>,
       container,
     );
   };
-  const expectSelector = (sel) => expect(container.querySelector(sel));
+  const getSelector = (sel) => container.querySelector(sel);
+  const expectSelector = (sel) => expect(getSelector(sel));
   const execute = ({ arrange, act, assert }) => {
     // before each test
     container = document.createElement('div');
@@ -34,7 +35,7 @@ const TestRender = () => {
   };
 
   return {
-    execute, render, renderWrapped, expectSelector,
+    execute, render, renderWrapped, getSelector, expectSelector,
   };
 };
 
