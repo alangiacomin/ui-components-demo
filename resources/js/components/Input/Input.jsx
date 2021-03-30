@@ -26,7 +26,7 @@ const Input = (props) => {
         className="form-control"
         name={name}
         type={type}
-        value={value}
+        defaultValue={value}
         onChange={handleChange}
       />
     </div>
