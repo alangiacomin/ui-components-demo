@@ -10,10 +10,14 @@ jobs:
 
   laravel-tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [8.x, 7.x]
     steps:
     - uses: shivammathur/setup-php@62aa8428dd605cc992b3d60a640cb37f20b5c65b
+      name: Use PHP ${{ matrix.php-version }}
       with:
-        php-version: '8.0'
+        php-version: ${{ matrix.php-version }}
     - uses: actions/checkout@v2
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
