@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  laravel-tests:
+  php-tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -37,7 +37,7 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
 
-  build:
+  js-tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
