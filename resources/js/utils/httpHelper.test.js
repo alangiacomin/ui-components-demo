@@ -2,51 +2,6 @@ import axios from 'axios';
 import httpRequest from './httpHelper';
 
 jest.mock('axios');
-
-/*
-
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-const get = (url, params, options = {}) => {
-  const returnFullResponse = options.fullResponse || false;
-  return axios.request({
-    url,
-    method: 'get',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    params: params || [],
-    ...options.cancelToken,
-  })
-    .then((result) => (returnFullResponse ? result : result.data));
-};
-
-const post = (url, data, options = {}) => {
-  const returnFullResponse = options.fullResponse || false;
-  return axios.request({
-    url,
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    data: data || [],
-    ...options.cancelToken,
-    // actions: { ...options.actions },
-  })
-    .then((result) => (returnFullResponse ? result : result.data));
-};
-
-const httpRequest = {
-  get,
-  post,
-};
-
-*/
-
-// export { httpRequest };
-
 axios.request.mockImplementation(() => Promise.resolve({ data: {} }));
 
 describe('httpRequest get', () => {
