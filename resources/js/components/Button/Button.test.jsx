@@ -2,10 +2,6 @@ import { fireEvent } from '@testing-library/react';
 import { TestRender } from '../../../testsUtils';
 import Button from './Button';
 
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('Button', () => {
   it('render', () => {
     const { render, expectSelector, execute } = TestRender();
@@ -161,7 +157,7 @@ describe('Button', () => {
     });
   });
 
-  it('change value', () => {
+  it('click', () => {
     const {
       render, getSelector, execute,
     } = TestRender();
@@ -172,7 +168,7 @@ describe('Button', () => {
           <Button onClick={myClickFunc} />,
         );
         const button = getSelector('button');
-        fireEvent.click(button); // .change(input, { target: { value: 'testValue' } });
+        fireEvent.click(button);
       },
       assert: () => {
         expect(myClickFunc).toHaveBeenCalledTimes(1);

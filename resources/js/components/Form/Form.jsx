@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/label-has-associated-control */
+import { PropTypes } from 'prop-types';
 import { createContext, useCallback } from 'react';
+import { Types } from '../../utils/componentsHelper';
 
 const FormContext = createContext({ });
 
@@ -34,6 +34,17 @@ const withForm = (Wrapped) => {
     </FormContext.Consumer>
   );
   return WrappedConsumer;
+};
+
+Form.propTypes = {
+  data: PropTypes.shape({}),
+  setData: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  children: Types.children.isRequired,
+};
+
+Form.defaultProps = {
+  data: {},
 };
 
 export {

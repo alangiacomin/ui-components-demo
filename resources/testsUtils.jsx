@@ -1,25 +1,32 @@
+import { createMemoryHistory } from 'history';
 import { render as renderDom, unmountComponentAtNode } from 'react-dom';
 import { act as actDom } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router';
+import { Router } from 'react-router';
 import { combineReducers, createStore } from 'redux';
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
 
 const emptyReducer = (state = [], action) => state;
 
 const TestRender = () => {
   let container = null;
+  const history = createMemoryHistory();
   const render = (Component) => renderDom(Component, container);
   const renderWrapped = (Component, { initialState = {}, reducers = [] } = {}) => {
-    const store = createStore(combineReducers({ user: emptyReducer }, ...reducers), initialState);
+    const store = createStore(combineReducers({ router: emptyReducer, user: emptyReducer }, ...reducers), initialState);
     return renderDom(
       <Provider store={store}>
-        <MemoryRouter>{Component}</MemoryRouter>
+        <Router history={history}>{Component}</Router>
       </Provider>,
       container,
     );
   };
   const getSelector = (sel) => container.querySelector(sel);
   const expectSelector = (sel) => expect(getSelector(sel));
+  const getLocation = () => history.location;
   const execute = ({ arrange, act, assert }) => {
     // before each test
     container = document.createElement('div');
@@ -35,7 +42,7 @@ const TestRender = () => {
   };
 
   return {
-    execute, render, renderWrapped, getSelector, expectSelector,
+    execute, render, renderWrapped, getSelector, expectSelector, getLocation,
   };
 };
 
@@ -64,9 +71,12 @@ const testRender = (children, { initialState, reducers = [] } = {}) => {
 
 const noOpFunc = () => null;
 
+const nullRenderedComponent = () => null;
+
 export {
   TestRender,
   noOpFunc,
+  nullRenderedComponent,
   // createElement,
   // hasClass,
   // getChildren,
