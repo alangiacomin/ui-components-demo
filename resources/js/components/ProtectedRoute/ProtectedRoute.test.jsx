@@ -14,7 +14,7 @@ import ProtectedRoute from './ProtectedRoute';
 
 describe('ProtectedRoute', () => {
   it('render route', () => {
-    const { renderWrapped, execute, getLocation } = TestRender();
+    const { renderWrapped, execute } = TestRender();
     execute({
       act: () => {
         renderWrapped(
@@ -35,9 +35,7 @@ describe('ProtectedRoute', () => {
   });
 
   it('render unauthorized', () => {
-    const {
-      renderWrapped, execute, getLocation,
-    } = TestRender();
+    const { renderWrapped, execute } = TestRender();
     execute({
       act: () => {
         renderWrapped(
