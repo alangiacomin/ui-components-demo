@@ -24,6 +24,7 @@ const TestRender = () => {
       container,
     );
   };
+  const getContainer = () => container;
   const getSelector = (sel) => container.querySelector(sel);
   const expectSelector = (sel) => expect(getSelector(sel));
   const getLocation = () => history.location;
@@ -42,7 +43,7 @@ const TestRender = () => {
   };
 
   return {
-    execute, render, renderWrapped, getSelector, expectSelector, getLocation,
+    execute, render, renderWrapped, getSelector, expectSelector, getLocation, getContainer,
   };
 };
 
