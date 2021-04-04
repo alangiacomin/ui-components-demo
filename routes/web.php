@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TranslationController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -23,4 +24,10 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/user', [UserController::class, 'user']);
 Route::post('/login', [UserController::class, 'postLogin']);
 Route::post('/logout', [UserController::class, 'logout']);
+
+
+Route::get('/translation/{locale}/{namespace}', [TranslationController::class, 'index'])
+    ->where('locale', '.+')
+    ->where('namespace', '.+');
+
 Route::get('/{any}', [HomeController::class, 'index'])->where('any', '.*')->name('home');

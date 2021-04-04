@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 const LazyComponent = ({ component, ...others }) => {
   const [LoadedComponent, setLoadedComponent] = useState(null);
@@ -18,7 +18,9 @@ const LazyComponent = ({ component, ...others }) => {
     return () => { isPending = false; };
   }, [component]);
 
-  return LoadedComponent ? <LoadedComponent {...others} /> : null;
+  return LoadedComponent
+    ? <Suspense fallback={null}><LoadedComponent {...others} /></Suspense>
+    : null;
 };
 
 LazyComponent.propTypes = {

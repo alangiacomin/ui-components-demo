@@ -1,23 +1,23 @@
 const routes = {
   home: {
-    title: 'Home',
+    title: 'home',
     to: '/',
     component: 'PaginaUno',
   },
   secondPage: {
-    title: 'Seconda pagina',
+    title: 'page_two',
     to: '/test',
     component: 'PaginaDue',
     perm: 'special_users_only',
   },
   login: {
-    title: 'Login',
+    title: 'login',
     to: '/login',
     component: 'Login',
     perm: 'special_guests_only',
   },
   logout: {
-    title: 'Logout',
+    title: 'logout',
     to: '/logout',
     component: 'PaginaDue',
     perm: 'special_users_only',

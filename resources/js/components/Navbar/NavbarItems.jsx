@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import NavbarItem from './NavbarItem';
 
 const NavbarItems = (props) => {
-  const { className, links } = props;
+  const { className, links, t } = props;
   const navbarItemsClassName = classNames(
     'navbar-nav',
     className,
@@ -11,9 +11,7 @@ const NavbarItems = (props) => {
 
   return (
     <ul className={navbarItemsClassName}>
-      {links && links.map((link) => (
-        <NavbarItem key={link.id} link={link} />
-      ))}
+      {links && links.map((link) => <NavbarItem key={link.id} link={link} t={t} />)}
     </ul>
   );
 };
@@ -30,6 +28,7 @@ NavbarItems.propTypes = {
     isActive: PropTypes.func,
     title: PropTypes.string,
   })).isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 NavbarItems.defaultProps = {

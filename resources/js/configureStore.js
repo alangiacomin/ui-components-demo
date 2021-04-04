@@ -4,11 +4,13 @@ import {
   applyMiddleware, combineReducers, compose, createStore,
 } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import appReducer from './reducers/appReducer';
 import userReducer from './reducers/userReducer';
 
 const history = createBrowserHistory({ basename: '/' });
 
 const reducers = {
+  app: appReducer,
   user: userReducer,
 };
 
@@ -19,7 +21,9 @@ const configureStore = (preloadedState) => {
   const store = createStore(
     combineReducers({ router: connectRouter(history), ...reducers }),
     preloadedState,
-    composeWithDevTools(compose(applyMiddleware(...middlewares), ...enhancers)),
+    process.env.NODE_ENV === 'development'
+      ? composeWithDevTools(compose(applyMiddleware(...middlewares), ...enhancers))
+      : compose(applyMiddleware(...middlewares), ...enhancers),
   );
   return store;
 };

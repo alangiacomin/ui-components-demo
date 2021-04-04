@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { hasPermission } from '../../utils/userHelper';
 
-const NavbarItem = ({ link }) => {
+const NavbarItem = ({ link, t }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ const NavbarItem = ({ link }) => {
         exact={link.exact}
         isActive={link.isActive}
         onClick={onClick}
-      >{link.title}
+      >{t(link.title)}
       </NavLink>
     </li>
   );
@@ -48,6 +48,7 @@ NavbarItem.propTypes = {
     title: PropTypes.string,
     onClick: PropTypes.func,
   }).isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default NavbarItem;
