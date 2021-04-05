@@ -23,14 +23,14 @@ module.exports = {
   devtool: 'source-map',
   output: {
     path: path.join(`${__dirname}/public`),
-    filename: 'js/[name].js',
+    filename: 'js/[name].[chunkhash].js',
     chunkFilename: 'js/[name].[chunkhash].js',
   },
   mode: 'development',
   plugins: [].concat(
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css',
+      filename: 'css/[name].[chunkhash].css',
+      chunkFilename: 'css/[id].[chunkhash].css',
     }),
   ),
   module: {
