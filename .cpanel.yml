@@ -1,5 +1,6 @@
 ---
 deployment:
     tasks:
+        - source /home/zdhhezcz/nodevenv/repos/demo/12/bin/activate
         - /opt/cpanel/composer/bin/composer install
         - npm install
