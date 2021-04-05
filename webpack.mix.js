@@ -11,7 +11,58 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.setResourceRoot(process.env.APP_BASENAME);
+
+mix.webpackConfig({
+  output: {
+    publicPath: process.env.APP_BASENAME,
+    chunkFilename: 'js/app/[id].js?id=[chunkhash]',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: [/node_modules/],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { modules: false }],
+              ['@babel/preset-react', { runtime: 'automatic' }],
+            ],
+          },
+        },
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          // MiniCssExtractPlugin.loader,
+          // 'style-loader',
+          // 'css-loader',
+          // 'sass-loader',
+          'import-glob-loader',
+        ],
+      },
+    ],
+  },
+});
+
+// mix.copyDirectory('resources/images', 'public/images');
+// mix.copy('resources/*', 'public');
+// mix.copyDirectory('resources/js/locales', 'public/locales');
+
+mix.js('resources/js/index.jsx', 'public/js/app.js').react();
+
+mix.sass('resources/sass/app.scss', 'public/css');
+
+mix.extract();
+
+mix.disableNotifications();
+// mix.disableSuccessNotifications();
+
+if (mix.inProduction()) {
+  mix.version();
+  mix.sourceMaps();
+}
+
+// mix.dump();

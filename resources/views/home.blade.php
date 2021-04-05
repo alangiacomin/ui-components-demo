@@ -14,8 +14,9 @@
 
   <!-- Scripts -->
   <!-- <script src="{{ asset('/js/style.js') }}" defer></script> -->
-  <script src="{{ asset('/js/vendor.js') }}" defer></script>
-  <script src="{{ asset('/js/app.js') }}" defer></script>
+  <script src="{{ asset(mix('/js/manifest.js')) }}" defer></script>
+  <script src="{{ asset(mix('/js/vendor.js')) }}" defer></script>
+  <script src="{{ asset(mix('/js/app.js')) }}" defer></script>
 
   <!-- Fonts -->
   <!--
@@ -24,7 +25,7 @@
   -->
 
   <!-- Styles -->
-  <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset(mix('/css/app.css')) }}" rel="stylesheet">
 
   <script>
     window.appname='{{ config('app.name', 'My title') }}';
