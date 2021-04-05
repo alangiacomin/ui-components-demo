@@ -1,7 +1,9 @@
 ---
 deployment:
     tasks:
+        - php artisan down --render="errors::503"
         - source /home/zdhhezcz/nodevenv/repos/demo/12/bin/activate
         - /opt/cpanel/composer/bin/composer install
         - npm install
         - npm run build
+        - php artisan up
