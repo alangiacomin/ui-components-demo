@@ -2,8 +2,9 @@
     "private": true,
     "scripts": {
         "copy": "",
-        "start": "npm run dev -- --watch",
-        "dev": "webpack --mode development",
+        "start": "npm run dev -- watch",
+        "dev": "mix",
+        "dev2": "webpack --mode development",
         "build": "webpack --mode production --devtool source-map",
         "prod": "mix --production",
         "test": "jest",
