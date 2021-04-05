@@ -1,5 +1,5 @@
 ---
 deployment:
     tasks:
-        - composer install
+        - /opt/cpanel/composer/bin/composer install
         - npm install
