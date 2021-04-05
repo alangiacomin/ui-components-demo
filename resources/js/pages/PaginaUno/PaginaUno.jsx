@@ -32,7 +32,6 @@ const PaginaUno = (props) => {
       <h1>PAGINA UNO</h1>
       <p><Link to="/">Pagina uno</Link></p>
       <p><Link to={routes.secondPage.to}>Pagina due</Link></p>
-      <p><input name="test" /></p>
       <p>
         <button
           type="button"
