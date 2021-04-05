@@ -11,9 +11,11 @@ deployment:
         - npm run build
 
         - rm -rf ${DEPLOYPATH}/js
-        - rm -rf ${DEPLOYPATH}/css
-
+        - mkdir ${DEPLOYPATH}/js
         - /bin/cp --update --force -R public/js/ ${DEPLOYPATH}/js
+
+        - rm -rf ${DEPLOYPATH}/css
+        - mkdir ${DEPLOYPATH}/css
         - /bin/cp --update --force -R public/css/ ${DEPLOYPATH}/css
 
         - php artisan up
