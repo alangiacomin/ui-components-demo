@@ -47,8 +47,9 @@ mix.webpackConfig({
   },
 });
 
+mix.copy('resources/assets/favicon.ico', 'public');
+
 // mix.copyDirectory('resources/images', 'public/images');
-// mix.copy('resources/*', 'public');
 // mix.copyDirectory('resources/js/locales', 'public/locales');
 
 mix.js('resources/js/index.jsx', 'public/js/app.js').react();
