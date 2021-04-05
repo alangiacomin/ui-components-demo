@@ -1,5 +1,9 @@
 import { TestRender } from '../../../testsUtils';
+import useTranslation from '../../hooks/useTranslation';
 import Errore from './Errore';
+
+jest.mock('../../hooks/useTranslation');
+useTranslation.mockImplementation(() => ({ t: () => { } }));
 
 describe('Errore', () => {
   it('render default', () => {

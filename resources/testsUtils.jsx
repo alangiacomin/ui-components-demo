@@ -11,12 +11,28 @@ afterEach(() => {
 
 const emptyReducer = (state = [], action) => state;
 
+const defaultState = {
+  user: {},
+  router: {},
+  app: { lang: 'it' },
+};
+
 const TestRender = () => {
   let container = null;
   const history = createMemoryHistory();
   const render = (Component) => renderDom(Component, container);
   const renderWrapped = (Component, { initialState = {}, reducers = [] } = {}) => {
-    const store = createStore(combineReducers({ router: emptyReducer, user: emptyReducer }, ...reducers), initialState);
+    const store = createStore(
+      combineReducers(
+        {
+          app: emptyReducer,
+          router: emptyReducer,
+          user: emptyReducer,
+        },
+        ...reducers,
+      ),
+      { ...defaultState, ...initialState },
+    );
     return renderDom(
       <Provider store={store}>
         <Router history={history}>{Component}</Router>

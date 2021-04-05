@@ -1,5 +1,9 @@
 import { TestRender } from '../../../testsUtils';
+import useTranslation from '../../hooks/useTranslation';
 import LayoutMain from './LayoutMain';
+
+jest.mock('../../hooks/useTranslation');
+useTranslation.mockImplementation(() => ({ t: () => { } }));
 
 describe('LayoutMain', () => {
   it('render', () => {

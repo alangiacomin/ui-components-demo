@@ -3,6 +3,8 @@ import { fireEvent } from '@testing-library/react';
 import { TestRender } from '../../../testsUtils';
 import NavbarItem from './NavbarItem';
 
+const t = jest.fn();
+
 describe('NavbarItem', () => {
   it('render', () => {
     const { renderWrapped, expectSelector, execute } = TestRender();
@@ -13,7 +15,7 @@ describe('NavbarItem', () => {
           to: '/home',
         };
         renderWrapped(
-          <NavbarItem link={link} />,
+          <NavbarItem link={link} t={t} />,
         );
       },
       assert: () => {
@@ -35,7 +37,7 @@ describe('NavbarItem', () => {
     execute({
       act: () => {
         renderWrapped(
-          <NavbarItem link={link} />,
+          <NavbarItem link={link} t={t} />,
         );
         const item = getSelector('a');
         fireEvent.click(item);
@@ -57,7 +59,7 @@ describe('NavbarItem', () => {
     execute({
       act: () => {
         renderWrapped(
-          <NavbarItem link={link} />,
+          <NavbarItem link={link} t={t} />,
         );
         const item = getSelector('a');
         fireEvent.click(item);

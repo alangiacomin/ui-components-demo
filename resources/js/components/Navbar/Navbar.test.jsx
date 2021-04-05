@@ -1,5 +1,9 @@
 import { TestRender } from '../../../testsUtils';
+import useTranslation from '../../hooks/useTranslation';
 import Navbar from './Navbar';
+
+jest.mock('../../hooks/useTranslation');
+useTranslation.mockImplementation(() => ({ t: () => { } }));
 
 describe('Navbar', () => {
   const defaultProps = {
