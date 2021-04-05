@@ -1,7 +1,7 @@
 ---
 deployment:
     tasks:
-        - export DEPLOYPATH=/home/hsbpcoeu/public_html
+        - export DEPLOYPATH=/home/zdhhezcz/public_html
         - /opt/cpanel/composer/bin/composer install
         - source /home/zdhhezcz/nodevenv/repos/demo/12/bin/activate
         - npm install
@@ -11,11 +11,9 @@ deployment:
         - npm run build
 
         - rm -rf ${DEPLOYPATH}/js
-        - mkdir ${DEPLOYPATH}/js
         - /bin/cp --update --force -R public/js/ ${DEPLOYPATH}/js
 
         - rm -rf ${DEPLOYPATH}/css
-        - mkdir ${DEPLOYPATH}/css
         - /bin/cp --update --force -R public/css/ ${DEPLOYPATH}/css
 
         - php artisan up
