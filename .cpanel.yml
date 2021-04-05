@@ -1,9 +1,19 @@
 ---
 deployment:
     tasks:
-        - php artisan down --render="errors::503"
-        - source /home/zdhhezcz/nodevenv/repos/demo/12/bin/activate
+        - export DEPLOYPATH=/home/hsbpcoeu/public_html
         - /opt/cpanel/composer/bin/composer install
+        - source /home/zdhhezcz/nodevenv/repos/demo/12/bin/activate
         - npm install
+
+        - php artisan down --render="errors::503"
+
         - npm run build
+
+        - rm -rf ${DEPLOYPATH}/js
+        - rm -rf ${DEPLOYPATH}/css
+
+        - /bin/cp --update --force -R public/js/ ${DEPLOYPATH}/js
+        - /bin/cp --update --force -R public/css/ ${DEPLOYPATH}/css
+
         - php artisan up
