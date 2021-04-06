@@ -8,6 +8,9 @@ deployment:
 
         - php artisan down --render="errors::503"
 
+        - rm -rf public/js
+        - rm -rf public/css
+
         - npm run prod
 
         - rm -rf ${DEPLOYPATH}/js
