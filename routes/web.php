@@ -30,4 +30,6 @@ Route::get('/translation/{locale}/{namespace}', [TranslationController::class, '
     ->where('locale', '.+')
     ->where('namespace', '.+');
 
+Route::get('/testMail', [HomeController::class, 'testMail']);
+
 Route::get('/{any}', [HomeController::class, 'index'])->where('any', '.*')->name('home');
