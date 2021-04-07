@@ -15,7 +15,8 @@ class ExampleTest extends TestCase
     {
         $response = $this->get('/');
 
-        fwrite(STDERR, print_r($response->baseResponse->getContent(), true));
+        // utilizzata per capire perché su github restituiva HTTP-500
+        // fwrite(STDERR, print_r($response->baseResponse->getContent(), true));
 
         $response->assertStatus(200);
     }
