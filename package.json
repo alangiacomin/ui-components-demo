@@ -22,7 +22,7 @@
         "babel-loader": "8.2.2",
         "babel-plugin-transform-dynamic-import": "2.1.0",
         "css-loader": "5.2.0",
-        "eslint": "7.22.0",
+        "eslint": "7.28.0",
         "eslint-config-airbnb": "18.2.1",
         "eslint-config-react-app": "6.0.0",
         "eslint-plugin-babel": "5.3.1",
