@@ -36,7 +36,7 @@ jobs:
 
       # build node.js (v12) necessaria per creare file indispensabili alla get (es. Mix manifest)
     - name: Use Node.js 12.x
-      uses: actions/setup-node@v2.1.5
+      uses: actions/setup-node@v2.2.0
       with:
         node-version: 12.x
     - run: npm clean-install
@@ -60,7 +60,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2.1.5
+      uses: actions/setup-node@v2.2.0
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm clean-install
