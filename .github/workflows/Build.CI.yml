@@ -16,7 +16,7 @@ jobs:
     steps:
 
       # build php
-    - uses: shivammathur/setup-php@62aa8428dd605cc992b3d60a640cb37f20b5c65b
+    - uses: shivammathur/setup-php@a3727c20a40c006a0c926a223ac785280045cf23
       name: Use PHP ${{ matrix.php-version }}
       with:
         php-version: ${{ matrix.php-version }}
