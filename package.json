@@ -13,7 +13,7 @@
         "lint:watch": "esw --watch --color --ext .jsx resources/js/**/*.{js,jsx}"
     },
     "devDependencies": {
-        "@babel/core": "7.13.10",
+        "@babel/core": "7.15.5",
         "@babel/eslint-parser": "7.13.14",
         "@babel/preset-env": "7.13.12",
         "@babel/preset-react": "7.12.13",
