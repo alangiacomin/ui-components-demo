@@ -21,7 +21,7 @@
         "@testing-library/react": "11.2.6",
         "babel-loader": "8.2.2",
         "babel-plugin-transform-dynamic-import": "2.1.0",
-        "css-loader": "5.2.0",
+        "css-loader": "6.3.0",
         "eslint": "7.22.0",
         "eslint-config-airbnb": "18.2.1",
         "eslint-config-react-app": "6.0.0",
